@@ -2,6 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import "pages"
 import "persistence"
+import harbour.sailnotes 1.0
 
 ApplicationWindow
 {
@@ -9,6 +10,7 @@ ApplicationWindow
     initialPage: Component { MainPage { } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: defaultAllowedOrientations
+    FileHelper { id: fileHelper }
     NoteListModel { id: noteListModel }
     NotesDao { id: dao }
 

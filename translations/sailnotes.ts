@@ -2,6 +2,13 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
+    <name>AddPictureDialog</name>
+    <message>
+        <source>Draw a picture</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CoverPage</name>
     <message>
         <source>Sailnotes</source>
@@ -28,6 +35,14 @@
     </message>
     <message>
         <source>Enter the note title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add a picture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

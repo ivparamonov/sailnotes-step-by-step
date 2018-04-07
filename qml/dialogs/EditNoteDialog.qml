@@ -4,10 +4,13 @@ import Sailfish.Silica 1.0
 Dialog {
 
     property var note
+    property var picturesToRemove: []
     property string placeholder: qsTr("Enter the note description")
     property bool placeholderVisible: note.description.length === 0
 
     canAccept: titleTextField.text.length > 0
+
+    ListModel { id: gridModel }
 
     SilicaFlickable {
 
@@ -71,11 +74,80 @@ Dialog {
                     }
                 }
             }
+
+            Button {
+                x: Theme.paddingLarge
+                width: parent.width - 2 * Theme.paddingLarge
+                text: qsTr("Add a picture")
+                onClicked: openAddPictureDialog()
+            }
+
+            SilicaGridView {
+                id: gridView
+                x: Theme.paddingLarge
+                width: parent.width - 2 * Theme.paddingLarge
+                height: cellHeight * (gridModel.count + 1) / 2
+                cellWidth: width / 2
+                cellHeight: width / 2
+                model: gridModel
+
+                delegate: Item {
+                    x: Theme.paddingLarge
+                    y: Theme.paddingLarge
+                    width: gridView.cellWidth - Theme.paddingMedium
+                    height: gridView.cellHeight - Theme.paddingMedium
+
+                    Column {
+                        anchors.fill: parent
+                        Image {
+                            height: parent.height - deleteButton.height
+                            anchors {
+                                left: parent.left
+                                right: parent.right
+                            }
+                            fillMode: Image.PreserveAspectCrop
+                            source: path
+                        }
+                        Button {
+                            id: deleteButton
+                            width: parent.width
+                            text: qsTr("Delete")
+                            onClicked: {
+                                picturesToRemove.push(path);
+                                note.picturePaths = note.picturePaths.replace("," + path, "")
+                                                        .replace(path + ",", "").replace(path, "");
+                                gridView.model.remove(index);
+                            }
+                        }
+                    }
+                }
+                Component.onCompleted: {
+                    note.picturePaths.split(',').filter(function(path) {
+                        return path.length > 0;
+                    }).forEach(function(path) {
+                        gridModel.append({path: path});
+                    });
+                }
+            }
         }
+    }
+
+    function openAddPictureDialog() {
+        titleTextField.focus = false;
+        descriptionTextEdit.focus = false;
+        var dialog = pageStack.push(Qt.resolvedUrl("AddPictureDialog.qml"));
+        dialog.accepted.connect(function() {
+            note.picturePaths += (note.picturePaths.length > 0 ? "," : "")
+                    + dialog.picturePath;
+            gridModel.append({path: dialog.picturePath});
+        });
     }
 
     onAccepted: {
         note.title = titleTextField.text;
         note.description = placeholderVisible ? "" : descriptionTextEdit.text;
+        picturesToRemove.forEach(function(path) {
+            fileHelper.removeFile(path);
+        });
     }
 }

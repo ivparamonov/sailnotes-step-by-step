@@ -28,7 +28,8 @@ DISTFILES += qml/sailnotes.qml \
     qml/pages/MainPage.qml \
     qml/persistence/NotesDao.qml \
     qml/persistence/NoteListModel.qml \
-    qml/dialogs/EditNoteDialog.qml
+    qml/dialogs/EditNoteDialog.qml \
+    qml/dialogs/AddPictureDialog.qml
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
