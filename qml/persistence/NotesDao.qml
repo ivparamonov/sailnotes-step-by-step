@@ -16,9 +16,6 @@ Item {
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "title TEXT NOT NULL, description TEXT DEFAULT '', picturePaths TEXT DEFAULT '', "
                 + "audioFilePath TEXT DEFAULT '', reminderTimestamp INTEGER DEFAULT 0);");
-            tx.executeSql("INSERT INTO notes ("
-                + "title, description, picturePaths, audioFilePath, reminderTimestamp) "
-                + "VALUES('Test note', 'Test description', '', '', 0)");
         });
     }
 
