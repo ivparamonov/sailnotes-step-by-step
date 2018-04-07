@@ -1,8 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-import "../persistence"
-
 Page {
 
     SilicaListView {
@@ -23,9 +21,7 @@ Page {
             title: qsTr("Notes")
         }
 
-        model: NoteListModel {
-            id: noteListModel
-        }
+        model: noteListModel
 
         delegate: ListItem {
 
@@ -89,28 +85,12 @@ Page {
 
     Component.onCompleted: refreshNoteList()
 
-    NotesDao { id: dao }
-
     function refreshNoteList() {
         noteListModel.clear();
         dao.retrieveAllNotes(function(notes) {
             for (var i = 0; i < notes.length; i++) {
                 noteListModel.addNote(notes.item(i));
             }
-        });
-    }
-
-    function openAddNoteDialog() {
-        var note = {
-            title: "", description: "", picturePaths: "",
-            audioFilePath: "", reminderTimestamp: 0
-        };
-        var dialog = pageStack.push(Qt.resolvedUrl("../dialogs/EditNoteDialog.qml"), {note: note});
-        dialog.accepted.connect(function() {
-            var noteId = dao.createNote(dialog.note, function(noteId) {
-                dialog.note.id = noteId;
-                noteListModel.addNote(dialog.note);
-            });
         });
     }
 }
