@@ -9,9 +9,36 @@
     </message>
 </context>
 <context>
+    <name>EditNoteDialog</name>
+    <message>
+        <source>Enter the note description</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add a note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit the note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter the note title</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MainPage</name>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add a new note</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

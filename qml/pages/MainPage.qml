@@ -7,6 +7,13 @@ Page {
 
     SilicaListView {
 
+        PullDownMenu {
+            MenuItem {
+                text: qsTr("Add a new note")
+                onClicked: openAddNoteDialog();
+            }
+        }
+
         id: noteListView
         anchors.fill: parent
 
@@ -65,6 +72,20 @@ Page {
             for (var i = 0; i < notes.length; i++) {
                 noteListModel.addNote(notes.item(i));
             }
+        });
+    }
+
+    function openAddNoteDialog() {
+        var note = {
+            title: "", description: "", picturePaths: "",
+            audioFilePath: "", reminderTimestamp: 0
+        };
+        var dialog = pageStack.push(Qt.resolvedUrl("../dialogs/EditNoteDialog.qml"), {note: note});
+        dialog.accepted.connect(function() {
+            var noteId = dao.createNote(dialog.note, function(noteId) {
+                dialog.note.id = noteId;
+                noteListModel.addNote(dialog.note);
+            });
         });
     }
 }
