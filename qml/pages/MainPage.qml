@@ -59,6 +59,31 @@ Page {
                     maximumLineCount: 1
                 }
             }
+
+            menu: ContextMenu {
+                MenuItem {
+                    text: qsTr("Edit")
+                    onClicked: {
+                        var note =  {
+                            id: id, title: title, description: description, picturePaths: picturePaths,
+                            audioFilePath: audioFilePath, reminderTimestamp: reminderTimestamp
+                        };
+                        var dialog = pageStack.push(Qt.resolvedUrl("../dialogs/EditNoteDialog.qml"),
+                                                    {note: note});
+                        dialog.accepted.connect(function() {
+                            dao.updateNote(dialog.note);
+                            noteListModel.updateNote(model.index, dialog.note);
+                        });
+                    }
+                }
+                MenuItem {
+                    text: qsTr("Delete")
+                    onClicked: {
+                        dao.deleteNote(id);
+                        noteListModel.remove(model.index);
+                    }
+                }
+            }
         }
     }
 
