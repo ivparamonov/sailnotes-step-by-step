@@ -1,0 +1,4 @@
+[D-BUS Service]
+Interface=/org/fruct/yar/sailnotes
+Name=org.fruct.yar.sailnotes
+Exec=/usr/bin/invoker --type=silica-qt5 --desktop-file=harbour-sailnotes.desktop -s -n /usr/bin/sailnotes

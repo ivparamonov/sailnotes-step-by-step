@@ -11,7 +11,7 @@ Dialog {
     property string placeholder: qsTr("Enter the note description")
     property bool placeholderVisible: note.description.length === 0
 
-    canAccept: titleTextField.text.length > 0
+    canAccept: titleTextField.text.length > 0 && !dateTimeValidationLabel.visible
 
     ListModel { id: gridModel }
 
@@ -34,6 +34,40 @@ Dialog {
                        ? qsTr("Add a note") : qsTr("Edit the note")
             }
 
+            ValueButton {
+                width: parent.width
+                label: qsTr("Reminder").concat(": ")
+                value: note.reminderTimestamp > 0
+                       ? Qt.formatDateTime(new Date(note.reminderTimestamp), "dd MMM yyyy hh:mm")
+                       : qsTr("Select")
+                onClicked: {
+                    var now = new Date();
+                    var dateTime = note.reminderTimestamp > 0
+                            ? new Date(note.reminderTimestamp)
+                            : new Date(now.getFullYear(), now.getMonth(), now.getDate(),
+                                       now.getHours(), now.getMinutes() + 1, 0, 0);
+                    var dialog = pageStack.push("../dialogs/EditReminderDialog.qml",
+                                                {dateTime: dateTime});
+                    dialog.accepted.connect(function() {
+                        note.reminderTimestamp = dialog.dateTime.getTime();
+                        value = note.reminderTimestamp > 0
+                                ? Qt.formatDateTime(new Date(note.reminderTimestamp), "dd MMM yyyy hh:mm")
+                                : qsTr("Select");
+                        dateTimeValidationLabel.visible = note.reminderTimestamp > 0
+                                && note.reminderTimestamp < new Date();
+                    });
+                }
+            }
+
+            Label {
+                id: dateTimeValidationLabel
+                visible: note.reminderTimestamp > 0 && note.reminderTimestamp < new Date()
+                text: qsTr("The reminder datetime must follow the current datetime")
+                color: Qt.rgba(1.0, 0.3, 0.3, 1)
+                wrapMode: Text.Wrap
+                x: Theme.horizontalPageMargin
+                width: parent.width - 2 * x
+            }
             TextField {
                 id: titleTextField
                 width: parent.width
@@ -159,5 +193,11 @@ Dialog {
         picturesToRemove.forEach(function(path) {
             fileHelper.removeFile(path);
         });
+        if (note.reminderTimestamp > 0) {
+            notificationManager.scheduleNotification(note.id, note.title, note.description,
+                                                     note.reminderTimestamp);
+        } else {
+            notificationManager.removeNotification(note.id);
+        }
     }
 }

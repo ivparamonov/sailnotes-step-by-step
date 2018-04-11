@@ -13,8 +13,9 @@
 TARGET = sailnotes
 
 CONFIG += sailfishapp
+PKGCONFIG += nemonotifications-qt5
 
-QT += multimedia
+QT += dbus multimedia
 
 SOURCES += src/sailnotes.cpp \
     src/filehelper.cpp \
@@ -33,7 +34,8 @@ DISTFILES += qml/sailnotes.qml \
     qml/persistence/NoteListModel.qml \
     qml/dialogs/EditNoteDialog.qml \
     qml/dialogs/AddPictureDialog.qml \
-    qml/components/AudioPlayer.qml
+    qml/components/AudioPlayer.qml \
+    qml/components/NotificationManager.qml
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
@@ -44,3 +46,8 @@ CONFIG += sailfishapp_i18n
 HEADERS += \
     src/filehelper.h \
     src/audiorecorder.h
+
+dbus.files = dbus/org.fruct.yar.sailnotes.service
+dbus.path = /usr/share/dbus-1/services/
+
+INSTALLS += dbus

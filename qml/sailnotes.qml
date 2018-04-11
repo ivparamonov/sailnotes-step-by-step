@@ -4,6 +4,8 @@ import "pages"
 import "persistence"
 import harbour.sailnotes 1.0
 
+import "components"
+
 ApplicationWindow
 {
     id: appWindow
@@ -12,6 +14,7 @@ ApplicationWindow
     allowedOrientations: defaultAllowedOrientations
     FileHelper { id: fileHelper }
     NoteListModel { id: noteListModel }
+    NotificationManager { id: notificationManager }
     NotesDao { id: dao }
 
     function openAddNoteDialog() {

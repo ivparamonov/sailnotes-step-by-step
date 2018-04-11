@@ -45,6 +45,49 @@
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Reminder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The reminder datetime must follow the current datetime</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>EditReminderDialog</name>
+    <message>
+        <source>Add reminder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit reminder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The reminder datetime must follow the current datetime</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear reminder</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainPage</name>
