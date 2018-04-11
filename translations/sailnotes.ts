@@ -108,4 +108,15 @@
         <translation type="unfinished"></translation>
     </message>
 </context>
+<context>
+    <name>NoteDetailsPage</name>
+    <message>
+        <source>Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reminder</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 </TS>

@@ -30,6 +30,7 @@ DISTFILES += qml/sailnotes.qml \
     translations/*.ts \
     sailnotes.desktop \
     qml/pages/MainPage.qml \
+    qml/pages/NoteDetailsPage.qml \
     qml/persistence/NotesDao.qml \
     qml/persistence/NoteListModel.qml \
     qml/dialogs/EditNoteDialog.qml \

@@ -56,6 +56,12 @@ Page {
                 }
             }
 
+            onClicked: {
+                pageStack.push(Qt.resolvedUrl("NoteDetailsPage.qml"),
+                               {title: title, description: description, picturePaths: picturePaths,
+                                reminderTimestamp: reminderTimestamp, audioFilePath: audioFilePath});
+            }
+
             menu: ContextMenu {
                 MenuItem {
                     text: qsTr("Edit")
