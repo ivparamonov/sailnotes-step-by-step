@@ -14,8 +14,11 @@ TARGET = sailnotes
 
 CONFIG += sailfishapp
 
+QT += multimedia
+
 SOURCES += src/sailnotes.cpp \
-    src/filehelper.cpp
+    src/filehelper.cpp \
+    src/audiorecorder.cpp
 
 DISTFILES += qml/sailnotes.qml \
     qml/cover/CoverPage.qml \
@@ -38,4 +41,5 @@ SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 CONFIG += sailfishapp_i18n
 
 HEADERS += \
-    src/filehelper.h
+    src/filehelper.h \
+    src/audiorecorder.h
