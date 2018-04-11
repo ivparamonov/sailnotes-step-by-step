@@ -15,6 +15,6 @@ int main(int argc, char *argv[])
     //
     // To display the view, call "show()" (will show fullscreen on device).
     qmlRegisterType<FileHelper>("harbour.sailnotes", 1, 0, "FileHelper");
-    qmlRegisterType<FileHelper>("harbour.sailnotes", 1, 0, "AudioRecorder");
+    qmlRegisterType<AudioRecorder>("harbour.sailnotes", 1, 0, "AudioRecorder");
     return SailfishApp::main(argc, argv);
 }

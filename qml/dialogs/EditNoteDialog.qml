@@ -1,6 +1,9 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
+import "../components"
+
+
 Dialog {
 
     property var note
@@ -81,6 +84,12 @@ Dialog {
                 text: qsTr("Add a picture")
                 onClicked: openAddPictureDialog()
             }
+            AudioPlayer {
+                id: audioPlayer
+                x: Theme.paddingMedium
+                width: parent.width - 2 * Theme.paddingMedium
+                audioFilePath: note.audioFilePath
+            }
 
             SilicaGridView {
                 id: gridView
@@ -146,6 +155,7 @@ Dialog {
     onAccepted: {
         note.title = titleTextField.text;
         note.description = placeholderVisible ? "" : descriptionTextEdit.text;
+        note.audioFilePath = audioPlayer.audioFileExists ? audioPlayer.audioFilePath : "";
         picturesToRemove.forEach(function(path) {
             fileHelper.removeFile(path);
         });
